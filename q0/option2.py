@@ -1,35 +1,30 @@
-import math
+import sympy
 
-# Заданные параметры
-alpha_0 = -2
-beta_0 = 3
-gamma_0 = -3
+# Declare x as a symbolic variable
+x = sympy.symbols('x')
 
-# Вычисление общего множителя (9*alpha_0 + 2*beta_0 - 4*gamma_0)
-common_factor = 9 * alpha_0 + 2 * beta_0 - 4 * gamma_0
+# Given parameter values
+alpha0 = 0
+beta0 = 2
+gamma0 = 1
 
-# Вычисление коэффициентов для psi_1^(0)
-psi_1_coeff_x = 2 * common_factor
-psi_1_coeff_const = 2 * (-(3 * alpha_0 + beta_0 - gamma_0))
-psi_1_coeff_x_inv = 2 * (-alpha_0 / 2)
-psi_1_coeff_const_term = 2 * (-(3 * alpha_0 + beta_0 - gamma_0))
+# Calculate K and L based on the given parameters
+K = 9 * alpha0 + 2 * beta0 - 4 * gamma0
+L = beta0 + gamma0
 
-# Вычисление коэффициентов для psi_2^(0)
-psi_2_coeff_x = -3 * common_factor
-psi_2_coeff_const = (27 * alpha_0 + 7 * beta_0 - 11 * gamma_0)
-psi_2_coeff_x_inv = -beta_0
-psi_2_coeff_const_term = (27 * alpha_0 + 7 * beta_0 - 11 * gamma_0)
+# --- Calculate psi1^(0) ---
+psi1_0 = sympy.exp(-2 * x) * (2 * (K * x - (K + L) / 3) * sympy.log(sympy.Abs(x)) - 2 * L * x / 3 - 2 * K / 3 - alpha0 * x**(-1))
 
-# Вычисление коэффициентов для psi_3^(0)
-psi_3_coeff_x = 3 * common_factor
-psi_3_coeff_const = -(beta_0 + gamma_0)
-psi_3_coeff_x_inv = -gamma_0
-psi_3_coeff_const_term = -(beta_0 + gamma_0)
+# --- Calculate psi2^(0) ---
+psi2_0 = sympy.exp(-2 * x) * ((-3 * K * x + 3 * K + L) * sympy.log(sympy.Abs(x)) + L * x + 3 * K - beta0 * x**(-1))
 
-# Вывод упрощенных уравнений в виде строк
-print(f"Подставляем параметры: alpha_0 = {alpha_0}, beta_0 = {beta_0}, gamma_0 = {gamma_0}")
-print("---")
-print("Уравнения с подставленными параметрами:")
-print(f"psi_1^(0) = 2*e^(-2x) * ( ({psi_1_coeff_x}x + {psi_1_coeff_const})*ln|x| + {psi_1_coeff_x_inv}*x^-1 + {psi_1_coeff_const_term} )")
-print(f"psi_2^(0) = e^(-2x) * ( ({psi_2_coeff_x}x + {psi_2_coeff_const})*ln|x| + {psi_2_coeff_x_inv}*x^-1 + {psi_2_coeff_const_term} )")
-print(f"psi_3^(0) = e^(-2x) * ( ({psi_3_coeff_x}x + {psi_3_coeff_const})*ln|x| + {psi_3_coeff_x_inv}*x^-1 + {psi_3_coeff_const_term} )")
+# --- Calculate psi3^(0) ---
+psi3_0 = sympy.exp(-2 * x) * ((3 * K * x - L) * sympy.log(sympy.Abs(x)) - L * x - gamma0 * x**(-1))
+
+# Print the results
+print("Expression for psi1^(0) after parameter substitution:")
+print(psi1_0)
+print("\nExpression for psi2^(0) after parameter substitution:")
+print(psi2_0)
+print("\nExpression for psi3^(0) after parameter substitution:")
+print(psi3_0)
