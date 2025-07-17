@@ -1,0 +1,605 @@
+%\documentclass[11pt,draft]{article}
+\documentclass[11pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{cmap}
+%\usepackage[russian, english]{babel}
+\usepackage[english,russian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{MnSymbol}
+\usepackage[active]{srcltx}
+\usepackage[final]{pdfpages}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{tikz}
+\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri}
+%\usepgflibrary{arrows} % LATEX and plain TEX and pure pgf
+\usetikzlibrary{arrows} % LATEX and plain TEX when using Tik Z
+\definecolor{whitesmoke}{rgb}{0.93,0.93,0.93} \definecolor{whitesmoke2}{rgb}{0.82,0.82,0.82}
+\mathsurround=2pt
+\setlength{\textwidth}{130mm}
+\setlength{\textheight}{192mm}
+%\textheight=202mm \textwidth =130mm 
+\hoffset=-5mm \voffset=-20mm
+\hyphenation{сис-те-ма сис-те-му сис-те-мой сис-те-ме сис-те-мы сис-те-ма-ми на-зы-ва-ет-ся оп-ре-де-ле-ние ве-ще-ст-вен-ной ха-рак-те-рис-ти-чес-кое
+мат-ри-цы  не-от-ри-ца-тель-ные чис-ла квад-рат-ная всег-да клас-си-чес-кая не-яв-ные ус-ло-вия замк-ну-той ус-ло-вие ал-геб-ра-и-чес-кие
+удов-лет-во-ря-ет про-ин-тег-ри-ро-вать эк-ви-ва-лент-нос-тью схо-ди-мос-ти реф-лек-сив-ность не-ко-то-ром  вы-ше-наз-ван-ная ос-таль-ные
+удов-лет-во-ря-ют ког-да ана-ли-ти-чес-кой дос-та-точ-ные каж-до-го каж-дая един-ст-вен-но-с-ти замк-ну-тая со-во-куп-но-с-ти пос-тав-лен-ных
+ха-рак-те-рис-ти-чес-ко-го нель-зя ли-неа-ри-за-ции час-ти Тог-да об-лас-ти не-е-дин-ст-вен-нос-ти Лип-ши-ца мес-то не-п-ре-рыв-на
+уп-рав-ле-ния ве-ще-ст-вен-нос-ти удов-лет-во-ря-ю-щие ана-ли-ти-чес-кую ко-ли-че-ст-ве мно-же-ст-ва не-бе-ру-ще-го-ся оп-ре-де-ле-на 
+до-пус-ти-мые рас-ту-щие пос-коль-ку поз-во-ля-ет конс-тан-ты  фак-ти-чес-ки не-пре-рыв-ностью по-ст-ро-ен-ный со-в-па-да-ет пос-то-ян-ны-ми
+сис-тем по-ряд-ка функ-ции не-пос-ред-ст-вен-но оп-ре-де-ле-ния не-ко-то-рой не-пре-рыв-ных абс-цис-сы дос-та-точ-но ус-ло-ви-ем
+един-ст-вен-ное яв-ля-ет-ся соб-ст-вен-ных Лаг-ран-жу не-ли-ней-ных ок-ре-ст-ность ок-ре-ст-нос-ти неп-ре-рыв-но До-пус-тим}
+
+\def\e{\varepsilon}
+\newcommand{\pp}{\varphi}
+
+\begin{document}
+
+\medskip
+%\noindent
+${\bf 28^0.}$ 
+{\bf Решение задачи\;{\text p28}.}\, Рассмотрим ЛНС (P28) с матрицей 
+
+\smallskip %\noindent 
+$A=\begin{pmatrix} 4&2&-2\\ -27&-9&11\\ 0&1&-1 \end{pmatrix},$ имеющей собственные числа $\lambda_{1,2,3}=-2,$ и %неоднородностью 
+
+\smallskip %\noindent 
+$q(x) =  \begin{pmatrix}
+\alpha_0 x^{-2}e^{-2x} + \alpha_1 x^2 + \alpha_2 x + \alpha_3 + (\alpha_4 x + \alpha_5)e^{-2x} + (\alpha_6 x + \alpha_7) \sin x \\
+\beta_0  x^{-2}e^{-2x} + \beta_1 x^2 + \beta_2 x  + \beta_3 +   (\beta_4 x + \beta_5)e^{-2x}   + (\beta_6 x + \beta_7) \sin x   \\
+\gamma_0 x^{-2}e^{-2x} + \gamma_1 x^2 + \gamma_2 x + \gamma_3 + (\gamma_4 x + \gamma_5)e^{-2x} + (\gamma_6 x + \gamma_7) \sin x 
+\end{pmatrix};$ 
+
+\smallskip %\noindent 
+Варианты неоднородностей:
+
+1)\ $q(x) = \begin{pmatrix}
+2\big(-x^{2} +x - 2 - e^{-2x}(8x - 1 - x^{-2}) + 2(12x+1)\sin x\big) \\
+9(x^2 - x + 3) + e^{-2x}(56x + 1 - 3x^{-2}) - 8(21x+4)\sin x \\
+-x^2 + x + 1 - e^{-2x}(8x - 1 - 3x^{-2}) + 39x\sin x
+\end{pmatrix}, $ 
+
+2)\ $q(x) = \begin{pmatrix}
+2x^{2} - 6 - e^{-2x}(4x - 1 - 2x^{-2}) + (10x+6)\sin x \\
+-11x^2 + 36 + e^{-2x}(20x + 1 - 9x^{-2}) - 39x \sin x\\
+x^2 + 2x - 1 + e^{-2x}(x+1) + (13 x - 1) \sin x
+\end{pmatrix}.$
+
+\smallskip
+{\small 
+1. Найдем фундаментальную матрицу линейной однородной системы
+
+\smallskip
+$y_1'=4y_1+2y_2-2y_3,\ \ \ y_2'=-27y_1-9y_2+11y_3,\ \ \ y_3'=y_2-y_3.$
+
+\smallskip
+Три  линейно независимых решения ЛОС будем искать в виде
+
+\smallskip
+$y_1=e^{-2x}(a_2x^2+a_1x+a_0),\ y_2=e^{-2x}(b_2x^2+b_1x+b_0),\ y_3=e^{-2x}(c_2x^2+c_1x+c_0).$
+
+\smallskip
+Подставим эти функции в систему, получая тождества:
+$$\begin{matrix}
+-2(a_2x^2+a_1x+a_0)+(2a_2x+a_1)\equiv\hfill\\
+\hfill \equiv 4(a_2x^2+a_1x+a_0)+2(b_2x^2+b_1x+b_0)-2(c_2x^2+c_1x+c_0),\\
+-2(b_2x^2+b_1x+b_0)+(2b_2x+b_1)\equiv\hfill\\
+\hfill \equiv -27(a_2x^2+a_1x+a_0)-9(b_2x^2+b_1x+b_0)+11(c_2x^2+c_1x+c_0),\\
+-2(c_2x^2+c_1x+c_0)+(2c_2x+c_1)\equiv\ (b_2x^2+b_1x+b_0)-(c_2x^2+c_1x+c_0).
+\end{matrix}$$
+
+Приравняем коэффициенты при $x^2,x^1,x^0:$ 
+
+\smallskip
+$\begin{cases}-2a_2=4a_2+2b_2-2c_2,\\ -2b_2=-27a_2-9b_2+11c_2,\\ -2c_2=b_2-c_2;\end{cases}\quad
+\begin{cases}2a_2-2a_1=4a_1+2b_1-2c_1,\\ 2b_2-2b_1=-27a_1-9b_1+11c_1,\\ 2c_2-2c_1=b_1-c_1;\end{cases}$
+
+$\begin{cases}a_1-2a_0=4a_0+2b_0-2c_0,\\ b_1-2b_0=-27a_0-9b_0+11c_0,\\ c_1-2c_0=b_0-c_0.\end{cases}$
+
+\smallskip
+Приведем подобные члены:
+
+\smallskip
+$\begin{cases}6a_2+2b_2-2c_2=0,\\ 27a_2+7b_2-11c_2=0,\\ b_2+c_2=0;\end{cases}\ 
+\begin{cases}3a_1+b_1-c_1=a_2,\\ 27a_1+7b_1-11c_1=-2b_2,\\ b_1+c_1=2c_2;\end{cases}\ 
+\begin{cases}6a_0+2b_0-2c_0=a_1,\\ 27a_0+7b_0-11c_0=-b_1,\\ b_0+c_0=c_1.\end{cases}$
+
+\smallskip
+В полученных системах выразим коэффициенты $a_j,\,b_j$ через $c_j\ \ (j=1,2,3):$
+
+\smallskip
+$ %\[
+\begin{pmatrix}
+a_2 \\ b_2
+\end{pmatrix}
+=
+\begin{pmatrix}
+2c_2/3 \\ -c_2
+\end{pmatrix},
+\quad
+\begin{pmatrix}
+a_1 \\ b_1
+\end{pmatrix}
+=
+\begin{pmatrix}
+2c_1/3 - 4c_2/9 \\ 2c_2 - c_1
+\end{pmatrix},
+\quad
+\begin{pmatrix}
+a_0 \\ b_0
+\end{pmatrix}
+=
+\begin{pmatrix}
+2c_0/3 - 2c_1/9 + 2c_2/27 \\ c_1 - c_0
+\end{pmatrix}.
+$ %\]
+
+\smallskip
+Имеет место невырожденный случай\;I, при котором три линейно независимых частных решения ЛОС ищем,
+последовательно приравнивая строку коэффициентов $(c_0,c_1,c_2)$ к строкам единичной (или диагональной, чтобы убрать числовые знаменатели) матрицы и находя по ним остальные коэффициенты:
+%\begin{align*}
+%&c_0=3, c_1=0, c_2=0 &&\Rightarrow a_0=2, b_0=-3, a_1=0, b_1=0, a_2=0, b_2=0; \\
+%&c_0=0, c_1=9, c_2=0 &&\Rightarrow a_0=-2, b_0=9, a_1=6, b_1=-9, a_2=0, b_2=0; \\
+%&c_0=0, c_1=0, c_2=27 &&\Rightarrow a_0=-2, b_0=0, a_1=-12, b_1=54, a_2=18, b_2=-27.
+%\end{align*}
+
+\smallskip 
+$c_0=3, c_1=0, c_2=0,$ тогда \,$a_0=2, b_0=-3, a_1=0, b_1=0, a_2=0, b_2=0;$ 
+
+$c_0=0, c_1=9, c_2=0,$ тогда \,$a_0=-2, b_0=9, a_1=6, b_1=-9, a_2=0, b_2=0;$ 
+
+$c_0=0, c_1=0, c_2=27,$ тогда \,$a_0=2, b_0=0, a_1=-12, b_1=54, a_2=18, b_2=-27.$
+
+\smallskip
+В результате вещественная фундаментальная матрица имеет вид
+
+\smallskip
+$$\Phi(x)=e^{-2x}\begin{pmatrix} 2 & 6x - 2 & 18x^2 - 12x - 2 \\ -3 & - 9x + 9 & - 27x^2 + 54x \\ 3 & 9x & 27x^2 \end{pmatrix},$$ %\\
+
+%\smallskip
+а общее решение \,$y=\Phi(x)c$\, ЛОС, где \,$c={\rm colon}\,(c_1,c_2,c_3),$ имеет вид
+\[
+y=e^{-2x}\begin{pmatrix} 
+2\big(c_1 + c_2 (3x - 1) + c_3 (9x^2 - 6x - 1)\big) \\ 
+3\big( -c_1-3c_2 (x-1) - 9c_3 (x^2 - 2x)\big) \\ 
+3(c_1 + 3c_2x + 9c_3x^2) 
+\end{pmatrix}.
+\]
+%-----------------------------------------------------------------------------------------
+
+%\smallskip
+2. Неоднородность %$q(x)$ 
+запишем в виде:
+$\displaystyle q=\sum_{j=0}^3 q^{(j)}(x),$ где $q^{(0)}=x^{-2}e^{-2x}\begin{pmatrix}\alpha_0\\ \beta_0\\ \gamma_0\end{pmatrix},$ 
+%
+%\smallskip
+%$q^{(0)}=x^{-2}e^{-2x}\begin{pmatrix}\alpha_0\\ \beta_0\\ \gamma_0\end{pmatrix},$ 
+$q^{(1)}=\begin{pmatrix} \alpha_1 x^2+\alpha_2 x+\alpha_3\\ \beta_1 x^2+\beta_2 x+\beta_3\\ \gamma_1 x^2+\gamma_2 x+\gamma_3 \end{pmatrix},\ \ 
+q^{(2)}=e^{-2x} \begin{pmatrix} \alpha_4 x + \alpha_5 \\ \beta_4 x + \beta_5 \\ \gamma_4 x + \gamma_5 \end{pmatrix},\ \ 
+q^{(3)}=\begin{pmatrix} (\alpha_6 x + \alpha_7) \sin x \\ (\beta_6 x + \beta_7) \sin x \\ (\gamma_6 x + \gamma_7) \sin x \end{pmatrix}.$
+
+\smallskip
+$2^0.$ Частное решение для неоднородности $q^{0} = x^{-2} e^{-2x} {\rm colon}\,(\alpha_0,\beta_0,\gamma_0)$ 
+будем искать методом вариации произвольной постоянной, считая константы из формулы общего решения ЛОС функциями $x$, 
+т.\,е. в виде $y=\psi^{(0)}(x),$ где \[
+\begin{cases}
+\psi_1^{(0)} = e^{-2x} \left( 2c_1(x) + c_2(x)(6x - 2) + c_3(x)(18x^2 - 12x - 2) \right), \\
+\psi_2^{(0)} = e^{-2x} \left( -3c_1(x) + c_2(x)(-9x + 9) + c_3(x)(-27x^2 + 54x) \right), \\
+\psi_3^{(0)} = e^{-2x} \left( 3c_1(x) + 9c_2(x)x + 27c_3(x)x^2 \right).
+\end{cases}
+\]
+
+%\smallskip
+Как было установлено, вектор производных $c'(x)$ удовлетворяет системе
+
+\smallskip
+$\Phi(x)c'(x)=q_0(x),$ 
+или
+$\begin{cases}
+2c_1' + (6x - 2)c_2' + (18x^2 - 12x - 2)c_3' = \alpha_0 x^{-2}, \\
+-3c_1' + (-9x + 9)c_2' + (-27x^2 + 54x)c_3' = \beta_0 x^{-2}, \\
+3c_1' + 9x c_2' + 27x^2 c_3' = \gamma_0 x^{-2}.
+\end{cases}$
+
+Следовательно, 
+$\begin{cases} c_1' = -\Bigl( 3(9\alpha_0 + 2\beta_0 -4\gamma_0) + 2(\beta_0 + \gamma_0) x^{-1} - 2\gamma_0 x^{-2} \Bigl)/6,\\ 
+c_2' = \Bigl(3(9\alpha_0 + 2\beta_0 - 4\gamma_0)x^{-1} + (\beta_0 + \gamma_0)x^{-2}\Bigl)/9,\\  
+c_3' = -(9\alpha_0 + 2\beta_0 - 4\gamma_0)x^{-2}/18.\end{cases}$
+
+Поэтому 
+$\begin{cases} 
+c_1(x) = -\Bigl(3x (9\alpha_0 + 2\beta_0 - 4\gamma_0) + 2(\beta_0 + \gamma_0) \ln|x| + 2\gamma_0 x^{-1} \Bigl)/6,\\ 
+c_2(x) = \Bigl(3(9\alpha_0 + 2\beta_0 - 4\gamma_0)\ln |x| - (\beta_0 + \gamma_0)x^{-1}\Bigl)/9,\\ 
+c_3(x) = (9\alpha_0 + 2\beta_0 - 4\gamma_0)x^{-1}/18.\end{cases}$
+
+В результате 
+\[
+\begin{cases}
+\begin{aligned}
+\psi_1^{(0)} &= 2e^{-2x} \Bigl[ \bigl( x(9\alpha_0 + 2\beta_0 -4\gamma_0)-(3\alpha_0+\beta_0-\gamma_0 )\bigl)\ln |x| - 
+  \alpha_0 x^{-1}/2 - \\
+&\quad - (3\alpha_0 +\beta_0 - \gamma_0) \Bigr], \\
+\psi_2^{(0)} &= e^{-2x} \Bigl[ \bigl( -3x(9\alpha_0 + 2\beta_0 - 4\gamma_0)+27\alpha_0 +7\beta_0 -11\gamma_0 \bigr)\ln |x| - 
+   \beta_0 x^{-1} + \\
+&\quad + 27\alpha_0 + 7\beta_0 -11\gamma_0 \Bigr], \\
+\psi_3^{(0)} &= e^{-2x} \Bigl[ \bigl( 3x(9\alpha_0 + 2\beta_0 - 4\gamma_0) -(\beta_0 +\gamma_0)  \bigr)\ln |x| - 
+\gamma_0x^{-1} -(\beta_0 +\gamma_0) \Bigr].
+\end{aligned}
+\end{cases}
+\]
+
+Варианты выбора параметров неоднородности:
+
+\smallskip
+1) $\begin{matrix} \alpha_0 = 2,\hfill\\ \beta_0 = -3,\\ \gamma_0 = 3,\hfill \end{matrix}$ \ 
+тогда \ \ $\begin{cases} 
+\psi_1^{(0)}= -2e^{-2x} x^{-1},\\ \psi_2^{(0)}= 3e^{-2x} x^{-1},\\ \psi_3^{(0)}= -3e^{-2x} x^{-1}; \end{cases}$ 
+
+\smallskip
+2) $\begin{matrix} \alpha_0 = 2,\hfill\\ \beta_0 = -9,\\ \gamma_0 = 0,\hfill \end{matrix}$ \ 
+тогда \ \ $\begin{cases} 
+\psi_1^{(0)} = 2e^{-2x} \big(3\ln |x| - x^{-1} + 3\big), \\
+\psi_2^{(0)} = 9e^{-2x} \big(-\ln |x| + x^{-1} - 1\big), \\
+\psi_3^{(0)} = 9e^{-2x} \big(\ln |x| + 1\big).
+\end{cases}$
+
+%\smallskip
+%3) $\begin{matrix} \alpha_0 = 4,\hfill\\ \beta_0 = 0,\\ \gamma_0 = 9,\hfill \end{matrix}$ \ 
+%тогда \ \ $\begin{cases} 
+%\psi_1^{(0)} = -2e^{-2x} \big(3\ln |x| + 2x^{-1} + 3\big), \\
+%\psi_2^{(0)} = 9e^{-2x} \big(\ln |x| + 1\big), \\
+%\psi_3^{(0)} = -9e^{-2x} \big(\ln |x| + x^{-1} + 1\big);
+%\end{cases}$
+
+%----------------------------------------------------------------------------------------
+\smallskip
+$2^1.$ Частное решение для неоднородности $q^{(1)}(x) = \begin{pmatrix} \alpha_1 x^2 + \alpha_2 x + \alpha_3 \\ \beta_1 x^2 + \beta_2 x + \beta_3 \\ \gamma_1 x^2 + \gamma_2 x + \gamma_3 \end{pmatrix}$ будем искать методом неопределенных коэффициентов. 
+
+Характеристическое число $\lambda_0=0$ неоднородности $q^{(1)}(x)$ не совпадает с собственными числами матрицы $A$, 
+поэтому решение ищем в виде $y=\psi^{(1)}(x),$ где
+
+\smallskip
+$\psi_1^{(1)} = a_2 x^2 + a_1 x + a_0, \quad \psi_2^{(1)} = b_2 x^2 + b_1 x + b_0, \quad \psi_3^{(1)} = c_2 x^2 + c_1 x + c_0.$
+
+\smallskip
+Подставляя эти функции в ЛНС $y'=Ay+q^{(1)}(x),$ получаем тождества
+\begin{align*}
+2a_2 x + a_1 &\equiv 4(a_2 x^2 + a_1 x + a_0) + 2(b_2 x^2 + b_1 x + b_0) - 2(c_2 x^2 + c_1 x + c_0) +\\
+             &\quad + (\alpha_1 x^2 + \alpha_2 x + \alpha_3), \\
+2b_2 x + b_1 &\equiv -27(a_2 x^2 + a_1 x + a_0) - 9(b_2 x^2 + b_1 x + b_0) + 11(c_2 x^2 + c_1 x + c_0) +\\
+             &\quad + (\beta_1 x^2 + \beta_2 x + \beta_3), \\
+2c_2 x + c_1 &\equiv (b_2 x^2 + b_1 x + b_0) - (c_2 x^2 + c_1 x + c_0) + (\gamma_1 x^2 + \gamma_2 x + \gamma_3).
+\end{align*}
+
+\smallskip
+Приравняем коэффициенты при линейно независимых функциях:
+%Приравнивая коэффициенты при $x^2,x^1,x^0,$ имеем:
+$$x^2:
+\begin{cases}
+4a_2 + 2b_2 - 2c_2 + \alpha_1 = 0, \\
+27a_2 + 9b_2 - 11c_2 - \beta_1 = 0, \\
+b_2 - c_2 + \gamma_1 = 0;
+\end{cases} \quad
+x^1:
+\begin{cases}
+2a_2 - 4a_1 - 2b_1 + 2c_1 - \alpha_2 = 0, \\
+2b_2 + 27a_1 + 9b_1 - 11c_1 - \beta_2 = 0, \\
+2c_2 -b_1 + c_1 - \gamma_2 = 0;
+\end{cases}
+$$
+$$x^0:
+\begin{cases}
+a_1 - 4a_0 - 2b_0 + 2c_0 - \alpha_3 = 0, \\
+b_1 + 27a_0 + 9b_0 - 11c_0 - \beta_3 = 0, \\
+c_1 - b_0 + c_0 - \gamma_3 = 0.
+\end{cases}
+$$
+
+Решая системы последовательно, начиная с последней, находим значения коэффициентов:
+\[
+\begin{array}{ll}
+a_2 = (-\alpha_1 + 2\gamma_1)/4, b_2 = (-27\alpha_1 - 4\beta_1 + 10\gamma_1)/8, c_2 = (-27\alpha_1 - 4\beta_1 + 18\gamma_1)/8, & \\[6pt]
+a_1 = (13\alpha_1 + 2\beta_1 - 8\gamma_1  - \alpha_2 + 2\gamma_2)/4, b_1 = (27\alpha_1 + 6\beta_1 - 8\gamma_1 -27\alpha_2 - 4\beta_2 + 10\gamma_2)/8, & \\
+c_1 = (81\alpha_1 + 14\beta_1 - 44\gamma_1 - 27\alpha_2 - 4\beta_2 + 18\gamma_2)/8, & \\[6pt]
+a_0 = (-34\alpha_1 - 6\beta_1 + 18\gamma_1 + 13\alpha_2 + 2\beta_2 - 8\gamma_2 - 2\alpha_3 + 4\gamma_3)/8, & \\[3pt]
+b_0 = (-2\beta_1 - 6\gamma_1 + 27\alpha_2 + 6\beta_2 - 8\gamma2/ - 54\alpha_3 - 8\beta_3 + 20\gamma_3)/16, & \\
+c_0 = (-162\alpha_1 - 30\beta_1 + 82\gamma_1 + 81\alpha_2 + 14\beta_2 - 44\gamma_2 - 54\alpha_3 -8\beta_3 +36\gamma_3)/16. &
+\end{array}
+\]
+
+Следовательно,
+\[
+\left\{
+\begin{aligned}
+\psi_1^{(1)} &= \big[2(- \alpha_1 + 2\gamma_1)x^2 + 2(13\alpha_1 + 2\beta_1 -8\gamma_1 - \alpha_2 + 2\gamma_2)x - \\
+&\quad -34\alpha_1 - 6\beta_1 + 18\gamma_1 + 13\alpha_2 + 2\beta_2 - 8\gamma_2 - 2\alpha_3 + 4\gamma_3\big]/8, \\
+\psi_2^{(1)} &= \big[2( - 27\alpha_1 - 4\beta_1 + 10\gamma_1)x^2 + 2(27\alpha_1 + 6\beta_1 - 8\gamma_1 - 27\alpha_2 - 4\beta_2 + 10\gamma_2)x - \\
+&\quad - 2\beta_1 - 6\gamma_1 + 27\alpha_2 + 6\beta_2 - 8\gamma_2 - 54\alpha_3 - 8\beta_3 + 20\gamma_3\big]/16, \\
+\psi_3^{(1)} &= \big[2( - 27\alpha_1 - 4\beta_1 + 18\gamma_1)x^2 + 2(81\alpha_1 + 14\beta_1 - 44\gamma_1 -27\alpha_2 - 4\beta_2 + 18\gamma_2)x - \\
+&\quad -162\alpha_1 - 30\beta_1 + 82\gamma_1 + 81\alpha_2 + 14\beta_2 - 44\gamma_2 -54\alpha_3 - 8\beta_3 + 36\gamma_3\big]/16.
+\end{aligned}
+\right.
+\]
+
+Варианты выбора коэффициентов:
+
+\smallskip
+1) $\begin{matrix} \alpha_1 = -2,\hfill\\ \beta_1 = 9,\\ \gamma_1 = -1,\hfill \end{matrix}$ \
+$\begin{matrix} \alpha_2 = 2,\hfill\\ \beta_2 = -9,\\ \gamma_2 = 1,\hfill \end{matrix}$ \
+$\begin{matrix} \alpha_3 = -4,\hfill\\ \beta_3 = 27,\\ \gamma_3 = 1,\hfill \end{matrix}$
+тогда \ \ $\begin{cases} 
+\psi_1^{(1)} = 1, \\
+\psi_2^{(1)} = x^2, \\
+\psi_3^{(1)} = x;
+\end{cases}$
+
+\smallskip
+2) $\begin{matrix} \alpha_1 = 2,\hfill\\ \beta_1 = -11,\\ \gamma_1 = 1,\hfill \end{matrix}$ \
+$\begin{matrix} \alpha_2 = 0,\hfill\\ \beta_2 = 0,\\ \gamma_2 = 2,\hfill \end{matrix}$ \
+$\begin{matrix} \alpha_3 = -6,\hfill\\ \beta_3 = 36,\\ \gamma_3 = -1,\hfill \end{matrix}$
+тогда \ \ $\begin{cases} 
+\psi_1^{(1)} = 1, \\
+\psi_2^{(1)} = 1, \\
+\psi_3^{(1)} = x^2.
+\end{cases}$
+
+%-----------------------------------------------------------------------------------------------
+
+\smallskip
+$2^2.$ Частное решение для неоднородности $q^{(2)}(x) = e^{-2x} \begin{pmatrix} \alpha_4 x + \alpha_5 \\ \beta_4 x + \beta_5 \\ \gamma_4 x + \gamma_5 \end{pmatrix}$ ищем методом неопределённых коэффициентов.
+
+Характеристическое число $\lambda_0 = -2$ неоднородности $q^{(2)}(x)$ совпадает с собственным числом матрицы $A$, причем $m=1$, $\tilde{k} = k = s = 3$, поэтому решение ищем в виде $y=\psi^{(2)}(x),$ где
+
+\[
+\begin{cases}
+\psi_1^{(2)} = e^{-2x} (a_4 x^4 + a_3 x^3 + a_2 x^2 + a_1 x + a_0), \\
+\psi_2^{(2)} = e^{-2x} (b_4 x^4 + b_3 x^3 + b_2 x^2 + b_1 x + b_0), \\
+\psi_3^{(2)} = e^{-2x} (c_4 x^4 + c_3 x^3 + c_2 x^2 + c_1 x + c_0).
+\end{cases}
+\]
+
+Выбираем $c_2 = c_1 = c_0 = 0$ и подставляем эти функции в ЛНС $y'=Ay+q^{(2)}(x),$ получая тождества:
+
+\[
+\begin{aligned}
+&-2(a_4x^4 + a_3x^3 + a_2x^2 + a_1x + a_0) + (4a_4x^3 + 3a_3x^2 + 2a_2x + a_1) \equiv \\
+&\quad \equiv4(a_4x^4 + a_3x^3 + a_2x^2 + a_1x + a_0) + 2(b_4x^4 + b_3x^3 + b_2x^2 + b_1x + b_0)- \\
+&\quad - 2(c_4x^4 + c_3x^3) + (\alpha_4x + \alpha_5), \\
+%
+&-2(b_4x^4 + b_3x^3 + b_2x^2 + b_1x + b_0) + (4b_4x^3 + 3b_3x^2 + 2b_2x + b_1) \equiv \\
+&\quad \equiv-27(a_4x^4 + a_3x^3 + a_2x^2 + a_1x + a_0) - 9(b_4x^4 + b_3x^3 + b_2x^2 + b_1x + b_0)+ \\
+&\quad + 11(c_4x^4 + c_3x^3) + (\beta_4x + \beta_5), \\
+%
+&-2(c_4x^4 + c_3x^3) + (4c_4x^3 + 3c_3x^2) \equiv \\
+&\quad \equiv(b_4x^4 + b_3x^3 + b_2x^2 + b_1x + b_0) - (c_4x^4 + c_3x^3) + (\gamma_4x + \gamma_5).
+\end{aligned}
+\]
+
+Приравниваем коэффициенты при линейно независимых функциях:
+\[
+\begin{aligned}
+x^4: & \begin{cases}
+-6a_4 - 2b_4 + 2c_4 = 0, \\
+27a_4 + 7b_4 - 11c_4 = 0, \\
+-b_4 - c_4 = 0;
+\end{cases} \hspace{0.25em}
+x^3: \begin{cases}
+-6a_3 + 4a_4 - 2b_3 + 2c_3 = 0, \\
+27a_3 + 7b_3 + 4b_4 - 11c_3 = 0, \\
+-b_3 - c_3 + 4c_4 = 0;
+\end{cases} \\
+x^2: & \begin{cases}
+-6a_2 + 3a_3 - 2b_2 = 0, \\
+27a_2 + 7b_2 + 3b_3 = 0, \\
+-b_2 + 3c_3 = 0;
+\end{cases}
+x^1: \begin{cases}
+-6a_1 + 2a_2 - 2b_1 = \alpha_4, \\
+27a_1 + 7b_1 + 2b_2 = \beta_4, \\
+-b_1 = \gamma_4;
+\end{cases}
+x^0: \begin{cases}
+-6a_0 + a_1 - 2b_0 = \alpha_5, \\
+27a_0 + 7b_0 + b_1 = \beta_5, \\
+-b_0 = \gamma_5.
+\end{cases}
+\end{aligned}
+\]
+Подставляясь поэтапно из нижней системы в остальные, находим значения коэффициентов, причем первая система выродится:
+\begin{align*}
+a_0 &= (\beta_5 + 7\gamma_5 + \gamma_4)/27, \quad a_1 = \alpha_5 + 2(\beta_5 - 2\gamma_5 + \gamma_4)/9, \\a_2 &= (3\alpha_4 + 18\alpha_5 + 4\beta_5 - 8\gamma_5 - 2\gamma_4)/6, \\
+a_3 &= \alpha_4 - 3\alpha_5 + (\beta_4 - 2\beta_5 + 4\gamma_5 - \gamma_4)/3, \quad a_4 = 0, \\[3pt]
+b_0 &= -\gamma_5, \quad b_1 = -\gamma_4, \quad b_2 = - 3\beta_5 + 6\gamma_5 + (\gamma_4 + \beta_4 - 27\alpha_5)/2,\\
+b_3 &= \beta_5 - 2\gamma_5 -(27\alpha_4 - 27\alpha_5 + 7\beta_4 - 11\gamma_4)/6, \quad b_4 = 0, \\[3pt]
+c_3 &= 2\gamma_5 - \beta_5 -(27\alpha_5 - \beta_4 - \gamma_4)/6, \quad c_4 = 0.
+\end{align*}
+
+Следовательно,
+\begin{equation*}
+\begin{cases}
+\psi_1^{(2)} = e^{-2x} \Bigl[ 
+6(3\alpha_4 + \beta_4 - \gamma_4 - 9 \alpha_5 - 2\beta_5 + 4\gamma_5) x^3 + \\
+\quad + 3( 3\alpha_4 - 2\gamma_4 + 18 \alpha_5 + 4\beta_5 - 8\gamma_5) x^2 + \\
+\quad + 2( 2\gamma_4 + 9\alpha_5 + 2\beta_5 - 4\gamma_5 ) x + 2(\gamma_4 + \beta_5 + 7\gamma_5) \Bigl]/18, \\
+\psi_2^{(2)} = e^{-2x} \Bigl[ 
+(-27\alpha_4 -7\beta_4 + 11\gamma_4 + 27\alpha_5 + 6\beta_5 - 12\gamma_5) x^3 + \\
+\quad + 3( \beta_4 + \gamma_4 - 27\alpha_5 -6\beta_5 + 12\gamma_5 ) x^2 - 6\gamma_4 x - 6\gamma_5 \Bigl]/6, \\
+\psi_3^{(2)} = e^{-2x} \Bigl[ 
+\beta_4 + \gamma_4 - 27\alpha_5 - 6\beta_5 + 12\gamma_5 \Bigl] x^3 /6.
+\end{cases}
+\end{equation*}
+И здесь степень многочлена <<случайно>> оказалась ниже четвертой.
+
+Варианты выбора коэффициентов:
+
+\smallskip
+1) $\begin{matrix} \alpha_4 = -16,\hfill\\ \beta_4 = 56,\\ \gamma_4 = -8,\hfill \end{matrix}$
+$\begin{matrix} \alpha_5 = 2,\hfill\\ \beta_5 = 1,\\ \gamma_5 = 1,\hfill \end{matrix}$ \ 
+тогда \ \ $\begin{cases} 
+\psi_1^{(2)} = 0, \\
+\psi_2^{(2)} = e^{-2x} (8x - 1), \\
+\psi_3^{(2)} = 0;
+\end{cases}$
+
+\smallskip
+2) $\begin{matrix} \alpha_4 = -4,\hfill\\ \beta_4 = 20,\\ \gamma_4 = 1,\hfill \end{matrix}$
+$\begin{matrix} \alpha_5 = 1,\hfill\\ \beta_5 = 1,\\ \gamma_5 = 1,\hfill \end{matrix}$ \ 
+тогда \ \ $\begin{cases} 
+\psi_1^{(2)} = e^{-2x} (x+1), \\
+\psi_2^{(2)} = -e^{-2x} (x+1), \\
+\psi_3^{(2)} = 0.
+\end{cases}$
+
+%------------------------------------------------------------------------------------------
+
+\smallskip
+$2^3.$ Частное решение для $q_3(x) = \begin{pmatrix} (\alpha_6 x + \alpha_7) \sin x \\ (\beta_6 x + \beta_7) \sin x \\ (\gamma_6 x + \gamma_7) \sin x \end{pmatrix}$ ищем методом неопределенных коэффициентов.
+
+Характеристическое число $\lambda_0=$ $i$ неоднородности $q^{(3)}(x)$ не совпадает с собственными числами матрицы $A$, поэтому решение ищем в виде \\ $\psi_j^{(3)} = (a_j x + b_j) \sin x + (c_j x + d_j) \cos x \quad (j=1,2,3).$
+
+Подставляя эти функции в ЛНС $y'=Ay+q^{(3)}(x),$ получаем тождества
+\begin{align*}
+&(a_1 \sin x + c_1 \cos x + (a_1 x + b_1)\cos x - (c_1 x + d_1)\sin x)\equiv \\
+&\equiv \big(4(a_1 x + b_1)\sin x + 2(a_2 x + b_2)\sin x - 2(a_3 x + b_3)\sin x+ \\
+&\quad + (\alpha_6 x + \alpha_7)\sin x + 4(c_1 x + d_1)\cos x + 2(c_2 x + d_2)\cos x - 2(c_3 x + d_3)\cos x\big),
+\end{align*}
+\vspace{-2em}
+\begin{align*}
+&(a_2 \sin x + c_2 \cos x + (a_2 x + b_2)\cos x - (c_2 x + d_2)\sin x)\equiv \\
+&\equiv \big(-27(a_1 x + b_1)\sin x - 9(a_2 x + b_2)\sin x + 11(a_3 x + b_3)\sin x+ \\
+&\quad + (\beta_6 x + \beta_7)\sin x - 27(c_1 x + d_1)\cos x - 9(c_2 x + d_2)\cos x+ 11(c_3 x + d_3)\cos x\big),
+\end{align*}
+\vspace{-2em}
+\begin{align*}
+&(a_3 \sin x + c_3 \cos x + (a_3 x + b_3)\cos x - (c_3 x + d_3)\sin x)\equiv \\
+&\equiv \big((a_2 x + b_2)\sin x - (a_3 x + b_3)\sin x + (c_2 x + d_2)\cos x- \\
+&\quad - (c_3 x + d_3)\cos x + (\gamma_6 x + \gamma_7)\sin x\big).
+\end{align*}
+
+\smallskip
+Приравняем коэффициенты при $x \cos x, \cos x, x \sin x, \sin x$:
+
+$x \cos x: \begin{cases} 
+a_1 - 4c_1 - 2c_2 + 2c_3 = 0, \\ 
+a_2 + 27c_1 + 9c_2 - 11c_3 = 0, \\ 
+a_3 - c_2 + c_3 = 0; 
+\end{cases}
+\cos x: \begin{cases} 
+b_1 + c_1 - 4d_1 - 2d_2 + 2d_3 = 0, \\ 
+b_2 + c_2 + 27d_1 + 9d_2 - 11d_3 = 0, \\ 
+b_3 + c_3 - d_2 + d_3 = 0; 
+\end{cases}$
+
+\hspace{-1em}
+$x \sin x: \begin{cases} 
+-4a_1 - 2a_2 + 2a_3 - c_1 = \alpha_6, \\ 
+27a_1 + 9a_2 - 11a_3 - c_2 = \beta_6, \\ 
+-a_2 + a_3 - c_3 = \gamma_6; 
+\end{cases}
+\sin x: \begin{cases} 
+a_1 - 4b_1 - 2b_2 + 2b_3 - d_1 = \alpha_7, \\ 
+a_2 + 27b_1 + 9b_2 - 11b_3 - d_2 = \beta_7, \\ 
+a_3 - b_2 + b_3 - d_3 = \gamma_7.
+\end{cases}$
+
+Решая системы последовательно, находим значения коэффициентов:
+\begin{align*}
+a_1 &= 2(52 \alpha_6 + 11 \beta_6 - 7 \gamma_6)/125, \\
+b_1 &= (-573 \alpha_6 - 124 \beta_6 + 208 \gamma_6 + 520 \alpha_7 + 110 \beta_7 - 70 \gamma_7)/625, \\
+c_1 &= (53 \alpha_6 + 4 \beta_6 - 48 \gamma_6)/125, \\
+d_1 &= (-536 \alpha_6 - 68 \beta_6 + 356 \gamma_6 + 265 \alpha_7 + 20 \beta_7 - 240 \gamma_7)/625, \\
+a_2 &= (-351 \alpha_6 - 43 \beta_6 + 141 \gamma_6)/125, \\
+b_2 &= (1107 \alpha_6 + 191 \beta_6 - 472 \gamma_6 - 1755 \alpha_7 - 215 \beta_7 + 705 \gamma_7)/625, \\
+c_2 &= (243 \alpha_6 + 49 \beta_6 - 88 \gamma_6)/125, \\
+d_2 &= (-1026 \alpha_6 - 238 \beta_6 + 346 \gamma_6 + 1215 \alpha_7 + 245 \beta_7 - 440 \gamma_7)/625, \\
+a_3 &= (-54 \alpha_6 + 3 \beta_6 + 89 \gamma_6)/125, \\
+b_3 &= (-567 \alpha_6 - 146 \beta_6 + 157 \gamma_6 - 270 \alpha_7 + 15 \beta_7 + 445 \gamma_7)/625, \\
+c_3 &= (297 \alpha_6 + 46 \beta_6 - 177 \gamma_6)/125, \\
+d_3 &= (-1944 \alpha_6 - 322 \beta_6 + 1074 \gamma_6 + 1485 \alpha_7 + 230 \beta_7 - 885 \gamma_7)/625.
+\end{align*}
+Следовательно,
+\begin{equation*}
+\begin{cases}
+\psi_1^{(3)} = \Big[ \Big( 10(52\alpha_6 + 11\beta_6 - 7\gamma_6)x - 573\alpha_6 - 124\beta_6 + 208\gamma_6 + 520\alpha_7 + 110\beta_7 - \\
+\quad - 70\gamma_7 \Big) \sin x + \Big( 5(53\alpha_6 + 4\beta_6 - 48\gamma_6)x - 536\alpha_6 - 68\beta_6 + 356\gamma_6 + 265\alpha_7 + 20\beta_7 -  \\
+\quad - 240\gamma_7 \Big) \cos x \Big]/625, \\
+\psi_2^{(3)} = \Big[ \Big(- 5(351\alpha_6 + 43\beta_6 - 141\gamma_6)x + 1107\alpha_6 + 191\beta_6 - 472\gamma_6 - 1755\alpha_7 - \\ 
+\quad - 215\beta_7 + 705\gamma_7 \Big) \sin x + \Big(5x(243\alpha_6 + 49\beta_6 - 88\gamma_6) - 1026\alpha_6 - 238\beta_6 + \\ 
+\quad + 346\gamma_6 + 1215\alpha_7 + 245\beta_7 - 440\gamma_7 \Big) \cos x \Big]/625, \\
+\psi_3^{(3)} = \Big[ \Big(- 5x(54\alpha_6 - 3\beta_6 - 89\gamma_6) -567\alpha_6 - 146\beta_6 + 157\gamma_6 - 270\alpha_7 + 15\beta_7 + \\
+\quad + 445\gamma_7 \Big) \sin x + \Big(5x(297\alpha_6 + 46\beta_6 - 177\gamma_6) - 1944\alpha_6 - 322\beta_6 + 1074\gamma_6 + \\ 
+\quad + 1485\alpha_7 + 230\beta_7 - 885\gamma_7 \Big) \cos x \Big]/625.
+\end{cases}
+\end{equation*}
+
+\smallskip
+Варианты выбора коэффициентов: 
+
+\smallskip
+1) $\begin{matrix} \alpha_6 = 48,\hfill\\ \beta_6 = -168,\\ \gamma_6 = 39,\hfill \end{matrix}$
+$\begin{matrix} \alpha_7 = 4,\hfill\\ \beta_7 = -32,\\ \gamma_7 = 0,\hfill \end{matrix}$ \ 
+тогда \ \ $\begin{cases} 
+\psi_1^{(3)} = 6x\sin x, \\
+\psi_2^{(3)} = (-33x+4) \sin x + 2\cos x, \\
+\psi_3^{(3)} = 3(x+1) \sin x - (3x-2) \cos x;
+\end{cases}$
+
+\smallskip
+2) $\begin{matrix} \alpha_6 = 10,\hfill\\ \beta_6 = -39,\\ \gamma_6 = 13,\hfill \end{matrix}$
+$\begin{matrix} \alpha_7 = 6,\hfill\\ \beta_7 = 0,\\ \gamma_7 = -1,\hfill \end{matrix}$ \ 
+тогда \ \ $\begin{cases} 
+\psi_1^{(3)} = 8\sin x - 2(x-3)\cos x, \\
+\psi_2^{(3)} = -22\sin x - (5x-18) \cos x, \\
+\psi_3^{(3)} = 4x \sin x - 9(x - 3)\cos x.
+\end{cases}$
+
+%\smallskip
+%3) $\alpha_6=1250, \hspace{0.5em} \beta_6=-4875, \hspace{0.5em} \gamma_6=1625, \hspace{0.5em} \alpha_7=0, %\hspace{0.5em} \beta_7=11375, \gamma_7=17875.$
+%\begin{equation*}
+%\begin{array}{l}
+%\text{Получим: } 
+%\begin{cases}
+%\begin{aligned}
+%y_1 &= 362\sin x - 2\cos x (125x + 3058) \\
+%y_2 &= 15747\sin x - \cos x (625x + 7421) \\
+%y_3 &= \sin x (500x + 13413) - \cos x (1125x + 19709)
+%\end{aligned}
+%\end{cases}
+%\end{array}
+%\end{equation*}
+
+\bigskip
+\textbf{Ответ:}
+$y=\Phi(x)c + \psi^{(0)} + \psi^{(1)} + \psi^{(2)} + \psi^{(3)}.$
+
+\bigskip
+\textbf{Ответ для первого $q(x)$:}
+\begin{equation*}
+\begin{cases}
+\begin{aligned}
+y_1 &= 2e^{-2x} \big( 9c_3 x^2 + 3(c_2 - 2c_3)x + c_1 - c_2 - c_3 - x^{-1} \big) + 1 + 6x\sin x, \\
+y_2 &= -e^{-2x} \big( 27c_3 x^2 + (9c_2 - 54c_3 - 8)x + 3c_1 - 9c_2 + 1 - 3x^{-1} \big) + x^2 - \\
+& \quad - (33x-4)\sin x + 2\cos x, \\
+y_3 &= 3e^{-2x} \big( 9c_3 x^2 + 3c_2x + c_1 - x^{-1} \big) + x + 3(x+1)\sin x - (3x-2) \cos x .
+\end{aligned}
+\end{cases}
+\end{equation*}
+
+\textbf{Ответ для второго $q(x)$:}
+\begin{equation*}
+\begin{cases}
+\begin{aligned}
+y_1 &= e^{-2x} \big( 18c_3 x^2 + (6c_2 - 12c_3 + 1)x + 2c_1 - 2c_2 - 2c_3 + 7 + 6 \ln|x| - 2x^{-1} \big) + \\
+& \quad + 1 + 8\sin x - 2(x-3) \cos x, \\
+y_2 &= -e^{-2x} \big( 27c_3x^2 + (9c_2 - 54c_3 + 1)x + 3c_1 - 9c_2 + 10 + 9\ln|x| - 9x^{-1} \big) + \\
+& \quad + 1 - 22\sin x - (5x - 18)\cos x, \\
+y_3 &= 3e^{-2x} \big( 9c_3 x^2 + 3c_2 x + c_1 + 3 + 3\ln|x| \big) + x^2 +4x\sin x - 9(x-3)\cos x.
+\end{aligned}
+\end{cases}
+\end{equation*}
+
+}
+
+\end{document}
