@@ -4,12 +4,12 @@ import sympy
 x = sympy.Symbol('x')
 
 # Define the coefficients
-alpha_4 = 48
-beta_4 = -216
-gamma_4 = 0
+alpha_4 = 18
+beta_4 = -45
+gamma_4 = 9
 
-alpha_5 = 24
-beta_5 = -144
+alpha_5 = 18
+beta_5 = -90
 gamma_5 = 0
 
 # Substitute the coefficients into the equations

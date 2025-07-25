@@ -1,46 +1,48 @@
 import sympy
 
-# Объявляем x как символьную переменную
-x = sympy.symbols('x')
+# Define the symbolic variable x
+x = sympy.Symbol('x')
 
-# Заданные значения параметров
-alpha4 = -4
-beta4 = 20
-gamma4 = 1
-alpha5 = 1
-beta5 = 1
-gamma5 = 1
+# Define the coefficients
+alpha_4 = 16
+beta_4 = -72
+gamma_4 = 0
 
-# Вычисление psi1^(2)
-# Числитель
-numerator_psi1 = (
-    6 * (3 * alpha4 + beta4 - gamma4 - 9 * alpha5 - 2 * beta5 + 4 * gamma5) * x**3 +
-    3 * (3 * alpha4 - 2 * gamma4 + 18 * alpha5 + 4 * beta5 - 8 * gamma5) * x**2 +
-    2 * (2 * gamma4 + 9 * alpha5 + 2 * beta5 - 4 * gamma5) * x +
-    2 * (gamma4 + beta5 + 7 * gamma5)
-)
-psi1_2 = sympy.exp(-2 * x) * numerator_psi1 / 18
+alpha_5 = -8
+beta_5 = 24
+gamma_5 = 0
 
-# Вычисление psi2^(2)
-# Числитель
-numerator_psi2 = (
-    (-27 * alpha4 - 7 * beta4 + 11 * gamma4 + 27 * alpha5 + 6 * beta5 - 12 * gamma5) * x**3 +
-    3 * (beta4 + gamma4 - 27 * alpha5 - 6 * beta5 + 12 * gamma5) * x**2 -
-    6 * gamma4 * x -
-    6 * gamma5
-)
-psi2_2 = sympy.exp(-2 * x) * numerator_psi2 / 6
+# Substitute the coefficients into the equations
+# Equation for psi_1^(2)
+psi1_numerator = -6 * (9 * alpha_4 + 2 * beta_4 - 8 * gamma_4) * x**4 + \
+                 24 * (3 * alpha_4 + beta_4 - 3 * gamma_4 - 9 * alpha_5 - 2 * beta_5 + 4 * gamma_5) * x**3 + \
+                 36 * (beta_4 - gamma_4 - 12 * alpha_5 - 4 * beta_5 + 8 * gamma_5) * x**2 + \
+                 6 * (beta_4 + gamma_4 - 24 * alpha_5 - 8 * beta_5 + 16 * gamma_5) * x + \
+                 (beta_4 + gamma_4 - 42 * alpha_5 - 8 * beta_5 + 44 * gamma_5)
 
-# Вычисление psi3^(2)
-# Числитель
-numerator_psi3 = (
-    beta4 + gamma4 - 27 * alpha5 - 6 * beta5 + 12 * gamma5
-)
-psi3_2 = sympy.exp(-2 * x) * numerator_psi3 * x**3 / 6
+psi1_2 = sympy.exp(-2 * x) * psi1_numerator / 72
 
-print("Выражение для psi1^(2) после подстановки параметров:")
-print(psi1_2)
-print("\nВыражение для psi2^(2) после подстановки параметров:")
-print(psi2_2)
-print("\nВыражение для psi3^(2) после подстановки параметров:")
-print(psi3_2)
+# Equation for psi_2^(2)
+psi2_numerator = 3 * (9 * alpha_4 + 2 * beta_4 - 8 * gamma_4) * x**4 - \
+                 4 * (27 * alpha_4 + 7 * beta_4 - 25 * gamma_4 - 27 * alpha_5 - 6 * beta_5 + 12 * gamma_5) * x**3 + \
+                 12 * (beta_4 - gamma_4 - 27 * alpha_5 - 6 * beta_5 + 12 * gamma_5) * x**2 - \
+                 24 * gamma_4 * x - 24 * gamma_5
+
+psi2_2 = sympy.exp(-2 * x) * psi2_numerator / 24
+
+# Equation for psi_3^(2)
+psi3_numerator = -3 * (9 * alpha_4 + 2 * beta_4 - 8 * gamma_4) * x**4 + \
+                 4 * (beta_4 - gamma_4 - 27 * alpha_5 - 6 * beta_5 + 12 * gamma_5) * x**3
+
+psi3_2 = sympy.exp(-2 * x) * psi3_numerator / 24
+
+# Simplify the expressions
+psi1_2_simplified = sympy.simplify(psi1_2)
+psi2_2_simplified = sympy.simplify(psi2_2)
+psi3_2_simplified = sympy.simplify(psi3_2)
+
+# Print the results
+print("Simplified expressions:")
+print(f"psi_1^(2) = {psi1_2_simplified}")
+print(f"psi_2^(2) = {psi2_2_simplified}")
+print(f"psi_3^(2) = {psi3_2_simplified}")
