@@ -25,6 +25,7 @@ results/
 plots/
 data/
 *.png
+!docs_example.png
 *.csv
 
 # OS
@@ -37,4 +38,3 @@ Thumbs.db
 *.out
 *.toc
 *.synctex.gz
-
