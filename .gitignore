@@ -23,10 +23,14 @@ env/
 # Results (generated files)
 results/
 plots/
-data/
 *.png
-!docs_example.png
-*.csv
+!images/*.png
+!images/
+
+# Data
+data/*.csv
+!data/example_data.csv
+!data/
 
 # OS
 .DS_Store

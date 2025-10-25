@@ -2,9 +2,10 @@
 Решение ЛНС: y' = Ay + q(x)
 
 Использование:
-    python main.py           # Вариант 1 (готовый пример)
-    python main.py 2         # Вариант 2 (готовый пример)
-    python main.py --custom  # Решить свою систему
+    python main.py              # Вариант 1 (готовый пример)
+    python main.py 2            # Вариант 2 (готовый пример)
+    python main.py --custom     # Решить свою систему
+    python main.py --regression # Регрессия: восстановить параметры из данных
 """
 
 from fundamental_matrix import verify_fundamental_matrix
@@ -214,6 +215,113 @@ def custom_mode():
         print(f"\n❌ Ошибка: {e}\n")
 
 
+def regression_mode():
+    """Режим регрессии: восстановление параметров из данных"""
+    import numpy as np
+    from regression import ParameterReconstructor
+
+    print("\n" + "="*70)
+    print("  РЕГРЕССИЯ: ВОССТАНОВЛЕНИЕ ПАРАМЕТРОВ ИЗ ДАННЫХ")
+    print("="*70)
+
+    print("\nВыберите источник данных:")
+    print("  [1] Демонстрация (синтетические данные)")
+    print("  [2] Загрузить из CSV файла")
+    print("  [3] Ввести массивы вручную")
+
+    choice = input("\nВыбор: ").strip()
+
+    if choice == "1":
+        # Демонстрация
+        from regression import demo
+        demo()
+
+    elif choice == "2":
+        # Загрузка из CSV
+        import pandas as pd
+        from pathlib import Path
+
+        filename = input("\nИмя CSV файла (например, data.csv): ").strip()
+
+        if not Path(filename).exists():
+            print(f"❌ Файл {filename} не найден!")
+            print("\nФормат CSV файла должен быть:")
+            print("x,y1,y2,y3")
+            print("0.0,1.0,0.5,0.2")
+            print("0.1,1.01,0.49,0.21")
+            print("...")
+            return
+
+        try:
+            df = pd.read_csv(filename)
+
+            # Определяем колонки
+            if 'x' not in df.columns:
+                print("❌ Не найдена колонка 'x' в CSV файле!")
+                return
+
+            x_data = df['x'].values
+
+            # Находим колонки y
+            y_cols = [col for col in df.columns if col.startswith('y')]
+            if not y_cols:
+                print("❌ Не найдены колонки y1, y2, y3 в CSV файле!")
+                return
+
+            y_data = df[y_cols].values
+
+            print(f"\n✓ Загружено {len(x_data)} точек, {len(y_cols)} компонент")
+            print(f"   Диапазон x: [{x_data.min():.2f}, {x_data.max():.2f}]")
+
+            # Регрессия
+            solver = ParameterReconstructor(alpha=0.01)
+            result = solver.solve(x_data, y_data)
+
+            # Визуализация
+            solver.plot_results(x_data, y_data)
+
+            print("\n✓ Готово! Результаты:")
+            print(f"   Матрица A: results/regression_analysis.png")
+
+        except Exception as e:
+            print(f"❌ Ошибка при загрузке: {e}")
+
+    elif choice == "3":
+        # Ввод вручную
+        print("\nВведите данные (массивы NumPy):")
+        print("Пример: x = [0, 0.1, 0.2, 0.3]")
+
+        try:
+            x_str = input("x_data = ").strip()
+            x_data = np.array(eval(x_str))
+
+            print("\nТеперь y_data (двумерный массив):")
+            print("Пример: [[1.0, 0.5, 0.2], [1.1, 0.48, 0.22], ...]")
+            y_str = input("y_data = ").strip()
+            y_data = np.array(eval(y_str))
+
+            if len(x_data) != len(y_data):
+                print("❌ Размеры x_data и y_data не совпадают!")
+                return
+
+            print(f"\n✓ Данные приняты: {len(x_data)} точек, {y_data.shape[1]} компонент")
+
+            # Регрессия
+            solver = ParameterReconstructor(alpha=0.01)
+            result = solver.solve(x_data, y_data)
+
+            # Визуализация
+            solver.plot_results(x_data, y_data)
+
+        except Exception as e:
+            print(f"❌ Ошибка: {e}")
+
+    else:
+        print("❌ Неверный выбор!")
+
+    print("\n" + "="*70 + "\n")
+
+
 def predefined_mode(variant_num):
     """Режим готовых примеров (варианты 1 и 2)"""
     params = variant_1() if variant_num == 1 else variant_2()
@@ -338,6 +446,8 @@ def predefined_mode(variant_num):
 def main():
     if len(sys.argv) > 1 and sys.argv[1] == "--custom":
         custom_mode()
+    elif len(sys.argv) > 1 and sys.argv[1] == "--regression":
+        regression_mode()
     elif len(sys.argv) > 1 and sys.argv[1].isdigit():
         variant_num = int(sys.argv[1])
         if variant_num in [1, 2]:
@@ -358,6 +468,7 @@ def show_help():
     print("  python main.py          → Вариант 1 (пример)")
     print("  python main.py 2        → Вариант 2 (пример)")
     print("  python main.py --custom → Своя система")
+    print("  python main.py --regression → Регрессия (найти параметры)")
     print("\n" + "="*50 + "\n")
 
 
