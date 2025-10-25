@@ -148,7 +148,67 @@ def custom_mode():
             print(f"         + {psi[f'psi{i+1}']}")
 
         print("\nРешение найдено!")
-        print("="*70 + "\n")
+        print("="*70)
+
+        # Визуализация и анализ
+        print("\n4. Визуализация и анализ (опционально):")
+        print("   [1] Построить графики")
+        print("   [2] Численный анализ (сравнение с scipy)")
+        print("   [3] Пропустить")
+        choice = input("   Выбор: ").strip()
+
+        if choice in ["1", "2"]:
+            import matplotlib
+            matplotlib.use('Agg')
+            from pathlib import Path
+            from visualization import plot_solution
+
+            Path("results").mkdir(exist_ok=True)
+
+            if choice == "1":
+                # Просто визуализация
+                x_min = float(input("\n   Диапазон x от: ").strip() or "0")
+                x_max = float(input("   Диапазон x до: ").strip() or "3")
+
+                plot_solution(psi, x_range=(x_min, x_max),
+                            title="Ваше решение ЛНС",
+                            save_path="results/custom_solution.png")
+                print(f"\n   ✓ График сохранен: results/custom_solution.png")
+
+            elif choice == "2":
+                # Полный анализ
+                from numerical_analysis import analyze_solution
+                import numpy as np
+                from sympy import lambdify
+
+                x_min = float(input("\n   Диапазон x от: ").strip() or "0")
+                x_max = float(input("   Диапазон x до: ").strip() or "3")
+
+                # Начальные условия
+                print("\n   Начальные условия y(x_min):")
+                y0 = []
+                for i in range(n):
+                    val = float(input(f"     y[{i+1}]({x_min}) = ").strip() or "0")
+                    y0.append(val)
+                y0 = np.array(y0)
+
+                # Конвертируем A и q в numpy
+                A_numpy = np.array(A.tolist(), dtype=float)
+
+                # Создаем функцию q(x)
+                q_lambdas = [lambdify(x, q_i, modules=['numpy']) for q_i in q_components]
+                def q_func(x_val):
+                    return np.array([f(x_val) for f in q_lambdas])
+
+                # Анализ
+                analyze_solution(psi, A_numpy, q_func, y0,
+                               x_range=(x_min, x_max),
+                               solution_name="Ваше решение",
+                               save_prefix="results/custom")
+
+                print(f"\n   ✓ Результаты сохранены в results/")
+
+        print("\n")
 
     except Exception as e:
         print(f"\n❌ Ошибка: {e}\n")
@@ -240,6 +300,39 @@ def predefined_mode(variant_num):
         print(f"         + {format_polynomial(psi1[f'psi{i}'])}")
         print(f"         + {psi2[f'psi{i}']}")
         print(f"         + {psi3[f'psi{i}']}")
+
+    # Визуализация (опционально)
+    print("\n" + "="*70)
+    print("Построить графики решения? [y/N]: ", end='')
+    choice = input().strip().lower()
+
+    if choice == 'y':
+        import matplotlib
+        matplotlib.use('Agg')
+        from pathlib import Path
+        from visualization import plot_solution
+
+        Path("results").mkdir(exist_ok=True)
+
+        # Объединяем все частные решения
+        combined_solution = {
+            'psi1': psi0['psi1'] + psi1['psi1'][0] + psi2['psi1'] + psi3['psi1'],
+            'psi2': psi0['psi2'] + psi1['psi2'][0] + psi2['psi2'] + psi3['psi2'],
+            'psi3': psi0['psi3'] + psi1['psi3'][0] + psi2['psi3'] + psi3['psi3']
+        }
+
+        # Исправляем полиномы (конвертируем из tuple)
+        from sympy import symbols as sym
+        x_sym = sym('x')
+        combined_solution['psi1'] = psi0['psi1'] + psi1['psi1'][0]*x_sym**2 + psi1['psi1'][1]*x_sym + psi1['psi1'][2] + psi2['psi1'] + psi3['psi1']
+        combined_solution['psi2'] = psi0['psi2'] + psi1['psi2'][0]*x_sym**2 + psi1['psi2'][1]*x_sym + psi1['psi2'][2] + psi2['psi2'] + psi3['psi2']
+        combined_solution['psi3'] = psi0['psi3'] + psi1['psi3'][0]*x_sym**2 + psi1['psi3'][1]*x_sym + psi1['psi3'][2] + psi2['psi3'] + psi3['psi3']
+
+        plot_solution(combined_solution, x_range=(0.1, 3),
+                     title=f"Вариант {variant_num}: Полное решение ЛНС",
+                     save_path=f"results/variant{variant_num}_solution.png")
+        print(f"\n✓ График сохранен: results/variant{variant_num}_solution.png")
+        print("="*70 + "\n")
 
 
 def main():
